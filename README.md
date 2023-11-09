@@ -30,10 +30,10 @@ Stock price prediction is a crucial task for both investors and traders. This pr
 
 To use this project, follow these steps:
 
-    1. Clone the repository to your local machine:
+ 1. Clone the repository to your local machine:
     
-    ```git clone https://github.com/yourusername/stock-price-prediction-lstm.git```
+    `git clone https://github.com/yourusername/stock-price-prediction-lstm.git`
 
-    2. Install the required python libraries
+2. Install the required python libraries
     `pip install pandas matplotlib tensorflow scikit-learn`
     
