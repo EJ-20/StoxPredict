@@ -8,20 +8,47 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM
 from tensorflow.keras.layers import *
 from tensorflow.keras.callbacks import EarlyStopping
+from bs4 import BeautifulSoup
+import requests
+import re
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import TimeSeriesSplit
+import xml
 
 #import stock data
-NVDA_stock = pd.read_csv('./NVDA.csv', index_col = "Date")
-NVDA_stock.head()
-AMD_stock =  pd.read_csv('./AMD.csv', index_col = "Date")
-AMD_stock.head()
-TSLA_stock =  pd.read_csv('./TSLA.csv', index_col = "Date")
-TSLA_stock.head()
+# NVDA_stock = pd.read_csv('./NVDA.csv', index_col = "Date")
+# NVDA_stock.head()
+# AMD_stock =  pd.read_csv('./AMD.csv', index_col = "Date")
+# AMD_stock.head()
+# TSLA_stock =  pd.read_csv('./TSLA.csv', index_col = "Date")
+# TSLA_stock.head()
+
+PATTERN = re.compile('<.*?>')
+
+urls = ['https://finance.yahoo.com/quote/NVDA/history?p=NVDA']
+
+def scrapeData():
+    page = requests.get(urls[0], headers={'User-Agent': 'Custom'})
+    soup = BeautifulSoup(page.text, "lxml")
+    table = soup.find('table', {"class":"W(100%) M(0)"})
+    rows = []
+
+    for i in table.findAll("th"):
+        headers = i.find("span").toString()
+        rows.append(re.sub(PATTERN, '', headers))
+    for i in table.findAll("tr"):
+        data = i.findAll("td")
+        if data != []: 
+            data2 = data.find("span")
+            rows.append(data2)
+    return rows
+
+
+scrapeData()
 
 #set values from imported files
 x_dates_NVDA = [dt.datetime.strptime(d, "%Y-%m-%d").date() for d in NVDA_stock.index.values]
