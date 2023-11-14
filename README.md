@@ -19,7 +19,7 @@ Stock price prediction is a crucial task for both investors and traders. This pr
 
 # Key Accomplishments
 
-    -Imported historical stock data for NVDA, AMD, and TSLA from CSV files.
+    -Imported historical stock data for NVDIA, AMD, and TSLA from CSV files.
     -Preprocessed data, including feature scaling and date formatting.
     -Developed LSTM models for stock price prediction.
     -Implemented time series data splitting and training/testing datasets.
