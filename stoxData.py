@@ -15,13 +15,18 @@ from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import TimeSeriesSplit
 
-#import stock data
+import yfinance as yf
+from datetime import date
+
+
+
+NVDA = yf.Ticker("nvda")
+NVDA_data = yf.download("NVDA", start= "2020-01-01", end=str(date.today()), actions= True)
+NVDA_data.to_csv("NVDA.csv")
+
 NVDA_stock = pd.read_csv('./NVDA.csv', index_col = "Date")
 NVDA_stock.head()
-AMD_stock =  pd.read_csv('./AMD.csv', index_col = "Date")
-AMD_stock.head()
-TSLA_stock =  pd.read_csv('./TSLA.csv', index_col = "Date")
-TSLA_stock.head()
+
 
 #set values from imported files
 x_dates_NVDA = [dt.datetime.strptime(d, "%Y-%m-%d").date() for d in NVDA_stock.index.values]
