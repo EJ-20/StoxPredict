@@ -11,6 +11,8 @@ from tensorflow.keras.callbacks import EarlyStopping
 from bs4 import BeautifulSoup
 import requests
 import re
+import csv
+from selenium import webdriver
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import mean_squared_error
@@ -30,25 +32,44 @@ import xml
 PATTERN = re.compile('<.*?>')
 
 urls = ['https://finance.yahoo.com/quote/NVDA/history?p=NVDA']
+driver = webdriver.Firefox()
+
+
 
 def scrapeData():
+
+    driver.get(urls[0])
+    driver.find_element_by_xpath('//a class="Fl(end) Mt(3px) Cur(p)" href="https://query1.finance.yahoo.com/v7/finance/download/NVDA?period1=1672063808&amp;period2=1703599808&amp;interval=1d&amp;events=history&amp;includeAdjustedClose=true" download="NVDA.csv"><svg class="Va(m)! Mend(5px) Stk($linkColor)! Fill($linkColor)! Cur(p)" width="15" style="fill:#0081f2;stroke:#0081f2;stroke-width:0;vertical-align:bottom" height="15" viewBox="0 0 24 24" data-icon="download"><path d="M21 20c.552 0 1 .448 1 1s-.448 1-1 1H3c-.552 0-1-.448-1-1s.448-1 1-1h18zM13 2v12.64l3.358-3.356c.375-.375.982-.375 1.357 0s.375.983 0 1.357L12 18l-5.715-5.36c-.375-.373-.375-.98 0-1.356.375-.375.983-.375 1.358 0L11 14.64V2h2z"></path></svg><span>Download</span></a>')
     page = requests.get(urls[0], headers={'User-Agent': 'Custom'})
     soup = BeautifulSoup(page.text, "lxml")
+
     table = soup.find('table', {"class":"W(100%) M(0)"})
     rows = []
-
+    rows.append([])
     for i in table.findAll("th"):
-        headers = i.find("span").toString()
-        rows.append(re.sub(PATTERN, '', headers))
+        
+        headers = i.find("span")
+        #rows.append(re.sub(PATTERN, '', headers))
+        rows[0].append(headers.contents[0])
+    
     for i in table.findAll("tr"):
+        
         data = i.findAll("td")
         if data != []: 
-            data2 = data.find("span")
-            rows.append(data2)
+            rows.append([])
+            for x in data:
+                data2 = x.findAll("span")
+                rows[-1].append(data2[0].contents[0])
+    with open("stockPrice.csv", "w+") as my_csv:
+        writer = csv.writer(my_csv)
+        writer.writerows(rows)
     return rows
 
 
 scrapeData()
+
+NVDA_stock = pd.read_csv('./stockPrice.csv', index_col = "Date")
+NVDA_stock.head()
 
 #set values from imported files
 x_dates_NVDA = [dt.datetime.strptime(d, "%Y-%m-%d").date() for d in NVDA_stock.index.values]
