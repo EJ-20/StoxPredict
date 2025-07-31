@@ -1,40 +1,119 @@
-# Stock Price Prediction with LSTM
+# StoxPredict - Stock Prediction with Enhanced Visualizations
 
-This project is an implementation of a stock price prediction model using Long Short-Term Memory (LSTM) neural networks. It focuses on forecasting stock prices for NVDA (NVIDIA), AMD, and TSLA (Tesla) stocks based on historical data.
+A comprehensive stock prediction project using LSTM neural networks with advanced visualizations for data analysis and model performance evaluation.
 
+## Features
 
-# Introduction
+### 📊 Enhanced Visualizations
+- **Modern Styling**: Professional color schemes and formatting
+- **Comprehensive Dashboards**: Multi-panel analysis views
+- **Interactive Plots**: Zoom, pan, and hover capabilities with Plotly
+- **Model Performance Analysis**: Training history, predictions vs actual, residuals
+- **Multi-stock Comparison**: Side-by-side analysis of NVDA, AMD, and TSLA
 
-Stock price prediction is a crucial task for both investors and traders. This project aims to provide a practical solution by developing a machine learning model based on LSTM neural networks. The project covers the prediction of stock prices for NVDA, AMD, and TSLA stocks using historical data.
+### 🤖 Machine Learning
+- LSTM neural network for time series prediction
+- Feature scaling and preprocessing
+- Model performance metrics (RMSE, MAPE)
+- Training history visualization
 
-# Technologies and Tools
+## Installation
 
-    -Python
-    -Pandas
-    -Matplotlib
-    -TensorFlow (Keras)
-    -Scikit-Learn
-    -StandardScaler
-    -TimeSeriesSplit
+1. Install required dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-# Key Accomplishments
+## Usage
 
-    -Imported historical stock data for NVDIA, AMD, and TSLA from CSV files.
-    -Preprocessed data, including feature scaling and date formatting.
-    -Developed LSTM models for stock price prediction.
-    -Implemented time series data splitting and training/testing datasets.
-    -Trained the LSTM model on historical data for NVDA stock.
-    -Evaluated model performance using Root Mean Squared Error (RMSE) and Mean Absolute Percentage Error (MAPE).
+### Basic Analysis (Matplotlib)
+Run the enhanced main script:
+```bash
+python stoxData.py
+```
 
-# Getting Started
+This will generate:
+- Stock price trends dashboard
+- Model performance analysis
+- Multi-stock comparison charts
 
-To use this project, follow these steps:
+### Interactive Analysis (Plotly)
+For interactive visualizations:
+```bash
+python interactive_plots.py
+```
 
- 1. Clone the repository to your local machine:
-    
-    `git clone https://github.com/yourusername/stock-price-prediction-lstm.git`
+This will create:
+- Interactive candlestick charts
+- Multi-stock comparison with hover details
+- Correlation heatmaps
+- Moving averages analysis
 
-2. Install the required python libraries
+## Visual Improvements Implemented
 
-    `pip install pandas matplotlib tensorflow scikit-learn`
+### 1. **Modern Plotting Style**
+- Professional color palette
+- Consistent formatting and fonts
+- Grid lines for better readability
+- Proper date formatting
+
+### 2. **Comprehensive Dashboards**
+- **Stock Analysis Dashboard**: Price trends, volume, distribution, returns
+- **Model Performance Dashboard**: Training loss, predictions, residuals, error distribution
+- **Multi-stock Comparison**: Side-by-side analysis of all stocks
+
+### 3. **Interactive Features**
+- Zoom and pan capabilities
+- Hover tooltips with detailed information
+- Unified hover mode for better data exploration
+- Responsive layouts
+
+### 4. **Advanced Analytics**
+- Moving averages (20-day and 50-day)
+- Correlation analysis between stocks
+- Daily returns analysis
+- Price distribution histograms
+
+### 5. **Model Evaluation**
+- Training loss visualization
+- Actual vs predicted comparison
+- Residual analysis
+- Error distribution analysis
+
+## File Structure
+
+```
+StoxPredict/
+├── stoxData.py          # Main analysis with enhanced matplotlib visualizations
+├── interactive_plots.py # Interactive Plotly visualizations
+├── requirements.txt     # Dependencies
+├── README.md           # This file
+├── NVDA.csv           # NVIDIA stock data
+├── AMD.csv            # AMD stock data
+└── TSLA.csv           # Tesla stock data
+```
+
+## Key Visual Enhancements
+
+1. **Color Scheme**: Professional color palette with consistent theming
+2. **Layout**: Well-organized subplots with proper spacing
+3. **Interactivity**: Hover details, zoom, and pan capabilities
+4. **Completeness**: Multiple analysis perspectives in single views
+5. **Readability**: Clear titles, labels, and legends
+
+## Performance Metrics
+
+The model provides:
+- **RMSE**: Root Mean Square Error
+- **MAPE**: Mean Absolute Percentage Error
+- **Training History**: Loss over epochs
+- **Prediction Accuracy**: Visual comparison of actual vs predicted values
+
+## Future Enhancements
+
+- Real-time data integration
+- Additional technical indicators
+- Portfolio optimization visualizations
+- Risk analysis charts
+- Export capabilities for reports
     
